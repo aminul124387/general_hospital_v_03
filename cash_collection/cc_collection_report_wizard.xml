@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="cc_collection_report_wizard_form" model="ir.ui.view">
+            <field name="name">CC.Report.Wizard.Form</field>
+            <field name="model">cc.collection.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Report CC Wizard">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_from"/>
+                            </group>
+                            <group>
+                                <field name="date_to"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Print" name="btn_cc_collection_report" class="btn btn-info"
+                                type="object"/>
+                        <button string="Cancel" name="cancel_action" class="btn btn-danger" type="object"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_cc_collection_report_id" model="ir.actions.act_window">
+            <field name="name">CC Report Wizard</field>
+            <field name="res_model">cc.collection.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+<!--        <menuitem name="Report" id="collection_main_menu" parent="hospital_menu_root" sequence="11"/>-->
+        <menuitem name="CC Collection Report" id="cc_collection_report_id" parent="collection_main_menu"
+                  action="action_cc_collection_report_id"/>
+
+    </data>
+</odoo>

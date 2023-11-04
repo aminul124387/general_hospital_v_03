@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="appointment_form_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="row mt1 mb44">
+                            <div class="col-12 text-center mt190">
+                                <h4 style="text-align:center;">
+                                    <strong>Appointment ID:
+                                        <span t-field="o.app_id"/>
+                                    </strong>
+                                </h4>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row mt20 mb20">
+                            <div class="col-12 text-right mb30">
+                                <strong>Date:</strong>
+                                <span t-field="o.create_date"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row" style="border: 1px solid #EFF1F2;">
+                            <div class="col-4">
+                                <strong>Patient ID:</strong>
+                                <span t-field="o.patient_id"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>Name:</strong>
+                                <span t-field="o.patient_name.name"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>Age:</strong>
+                                <span t-field="o.age"/>
+                            </div>
+                        </div>
+                        <div class="row" style="border: 1px solid #EFF1F2;">
+                            <div class="col-4">
+                                <strong>Address:</strong>
+                                <span t-field="o.address"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>Sex:</strong>
+                                <span t-field="o.gender"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>Mobile:</strong>
+                                <span t-field="o.mobile"/>
+                            </div>
+                        </div>
+                        <div class="row mb64 text-left" style="border: 1px solid #EFF1F2;">
+                            <div class="col-6">
+                                <strong>Doctor Name:</strong>
+                                <span t-field="o.doctor_id.name"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Appointment Datetime:</strong>
+                                <span t-field="o.app_datetime"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="cc_collection_report_template_id">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text-center">
+                        <h2>Daily Basis CC Collection Report</h2>
+                    </div>
+                    <br/>
+                    <br/>
+                    <table class="oe_structure colored-table">
+
+                        <tr style="padding: 10px;">
+                            <td style="padding-right: 10px;">
+                                <strong>Date From:</strong>
+                            </td>
+                            <td></td>
+                            <td style="padding-left: 10px;">
+                                <t t-if="form_data.get('date_from')">
+                                    <span t-esc="form_data['date_from']" style="color: green;"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;">
+                            <td style="padding-right: 10px;">
+                                <strong>Date To:</strong>
+                            </td>
+                            <td></td>
+                            <td style="padding-left: 10px;">
+                                <t t-if="form_data.get('date_to')">
+                                    <span t-esc="form_data['date_to']" style="color: green;"/>
+                                </t>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <br/>
+                    <table class="table table-bordered mt32">
+                        <thead>
+                            <tr>
+<!--                                <th t-attf-name="th_reference" class="text-left">-->
+<!--                                    <span>OPD Amount</span>-->
+<!--                                </th>-->
+                                <th t-attf-name="th_age" class="text-left">
+                                    <span>Investigation Amount</span>
+                                </th>
+                                <th t-attf-name="th_date" class="text-left">
+                                    <span>Admission</span>
+                                </th>
+                                <!--                                <th t-attf-name="th_doctor" class="text-left">-->
+                                <!--                                    <span>Doctor Name</span>-->
+                                <!--                                </th>-->
+                                <th t-attf-name="th_amount" class="text-left">
+                                    <span>Total Amount</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <t t-set="appointment_count" t-value="0"/>
+                        <t t-foreach="appointments" t-as="line">
+                            <t t-set="appointment_count" t-value="appointment_count + 1"/>
+                            <tr>
+                                <td>
+<!--                                    <span t-esc="line['opd_amount']"/>-->
+                                </td>
+                                <td>
+                                    <span t-esc="line['b_amnt']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="line['adm_amnt']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="line['total']"/>
+                                </td>
+
+                            </tr>
+                        </t>
+                        <tr>
+                            <td>
+                                <strong>Total Appointments:</strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    <span t-esc="appointment_count"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
+
