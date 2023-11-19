@@ -17,7 +17,7 @@ class HospitalBrokerProfile(models.Model):
         ('active', 'Active'),
         ('inactive', 'Inactive')], string='Status', default='active')
     #bill_info = fields.Char("Bill Register")
-    admission_info = fields.Char("Admission Info")
+    admission_info = fields.One2many('admission.info', 'referral', "Admission Info", domain=[('state', '=', 'confirmed')])
     commission = fields.Char("Commission")
     commission_rate = fields.Float("Commission Rate(%) ")
     last_commission_calculation_date = fields.Date("Last Commission Calculation Date")
@@ -29,6 +29,7 @@ class HospitalBrokerProfile(models.Model):
     #bill_ids = fields.One2many('bill.register', 'referral', domain=[('state', '=', 'confirmed')])
     appointment_count = fields.Integer(string='Appointment', compute='')
     bill_count = fields.Integer(string='Investigation', compute='btn_count_bills')
+    admission_count = fields.Integer(string='Admission', compute='btn_admission_item_count')
     # appointment_count = fields.Integer(string='Appointment Count', compute='count_appiontments')
     # app_ids = fields.One2many('appointment.booking', 'broker_id', string='Bills')
     # bill_ids = fields.One2many('bill.register', 'broker_id', string='Bills')
@@ -55,6 +56,10 @@ class HospitalBrokerProfile(models.Model):
         for record in self:
             record.bill_count = len(record.bill_info)
 
+    @api.depends('admission_info')
+    def btn_admission_item_count(self):
+        for record in self:
+            record.admission_count = len(record.admission_info)
     @api.model # This Function is used for the Generate Broker ID
     def create(self, vals):
         record = super().create(vals)

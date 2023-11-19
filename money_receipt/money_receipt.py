@@ -10,6 +10,7 @@ class MoneyReceipt(models.Model):
     name = fields.Char("Mr ID")
     date = fields.Datetime("Date", default=fields.Datetime.now())
     bill_id = fields.Many2one("bill.register", "BIll ID")
+    optic_sale_id = fields.Many2one("optics.sale", "Optics Sale ID")
     opd_id = fields.Many2one('opd.info', 'OPD ID')
     admission_id = fields.Many2one("admission.info", "Admission ID")
 
@@ -48,6 +49,7 @@ class MoneyReceipt(models.Model):
                                              ('m_cash_card', 'MFS & Card'),
                                              ('card_cash_mcash', 'Cash, Card & MFS')], default='cash')
     payment_line_ids = fields.One2many('bill.paymentline.info', 'money_receipt_id', string='Bill Payment Receipt')
+    optics_payment_line_ids = fields.One2many('optics.sale.payment.line', 'money_receipt_id', string='Optics Payment Receipt')
     admission_payment_line_ids = fields.One2many('hospital_admission.payment.line', 'money_receipt_id', string='Admission Payment Receipt')
     # Cancel Field --------------
     state = fields.Selection([

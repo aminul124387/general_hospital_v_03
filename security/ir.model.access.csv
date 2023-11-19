@@ -40,9 +40,41 @@ access_cancel_appointment,cancel_appointment,model_cancel_appointment,base.group
 access_create_appointment_wizard,create_appointment_wizard,model_create_appointment_wizard,base.group_user,1,1,1,1
 
 
+access_hospital_patient_medication,hospital_patient_medication,model_hospital_patient_medication,base.group_user,1,1,1,1
+access_hospital_medication_dosage,hospital_medication_dosage,model_hospital_medication_dosage,base.group_user,1,1,1,1
+access_hospital_medicament,hospital_medicament,model_hospital_medicament,base.group_user,1,1,1,1
+
+
+access_hospital_prescription_order,hospital_prescription_order,model_hospital_prescription_order,base.group_user,1,1,1,1
+access_hospital_prescription_line,hospital_prescription_line,model_hospital_prescription_line,base.group_user,1,1,1,1
+
+
+
+access_hospital_insurance,hospital_insurance,model_hospital_insurance,base.group_user,1,1,1,1
+access_hospital_insurance_plan,hospital_insurance_plan,model_hospital_insurance_plan,base.group_user,1,1,1,1
+
+
+
+access_hospital_vaccination,hospital_vaccination,model_hospital_vaccination,base.group_user,1,1,1,1
+
+
+access_hospital_lab,hospital_lab,model_hospital_lab,base.group_user,1,1,1,1
+access_hospital_test_type,hospital_test_type,model_hospital_test_type,base.group_user,1,1,1,1
+access_hospital_test_critearea,hospital_test_critearea,model_hospital_test_critearea,base.group_user,1,1,1,1
+access_hospital_lab_test_units,hospital_lab_test_units,model_hospital_lab_test_units,base.group_user,1,1,1,1
+access_hospital_patient_lab_test,hospital_patient_lab_test,model_hospital_patient_lab_test,base.group_user,1,1,1,1
+
+access_hospital_drug_route,hospital_drug_route,model_hospital_drug_route,base.group_user,1,1,1,1
+access_hospital_dose_unit,hospital_dose_unit,model_hospital_dose_unit,base.group_user,1,1,1,1
+
+
+
 access_opd_info,opd_info,model_opd_info,base.group_user,1,1,1,1
 access_opd_item,opd_item,model_opd_item,base.group_user,1,1,1,1
 access_package_info,package_info,model_package_info,base.group_user,1,1,1,1
+access_hospital_patient_disease,hospital_patient_disease,model_hospital_patient_disease,base.group_user,1,1,1,1
+access_hospital_pathology,hospital_pathology,model_hospital_pathology,base.group_user,1,1,1,1
+access_hospital_pathology_category,hospital_pathology_category,model_hospital_pathology_category,base.group_user,1,1,1,1
 
 access_patient_info,patient_info,model_patient_info,base.group_user,1,1,1,1
 access_doctors_profile,doctors_profile,model_doctors_profile,base.group_user,1,1,1,1
@@ -113,9 +145,13 @@ access_journal_receipt,journal_receipt,model_journal_receipt,base.group_user,1,1
 
 access_cash_collection,cash_collection,model_cash_collection,base.group_user,1,1,1,1
 access_cash_collection_line,cash_collection_line,model_cash_collection_line,base.group_user,1,1,1,1
+
 access_optic_lens,optic_lens,model_optic_lens,base.group_user,1,1,1,1
 access_optics_sale,optics_sale,model_optics_sale,base.group_user,1,1,1,1
 access_optics_sale_line,optics_sale_line,model_optics_sale_line,base.group_user,1,1,1,1
+access_optics_sale_payment_line,optics_sale_payment_line,model_optics_sale_payment_line,base.group_user,1,1,1,1
+
+
 access_blood_donor,blood_donor,model_blood_donor,base.group_user,1,1,1,1
 access_blood_receiver,blood_receiver,model_blood_receiver,base.group_user,1,1,1,1
 access_linen_entry,linen_entry,model_linen_entry,base.group_user,1,1,1,1

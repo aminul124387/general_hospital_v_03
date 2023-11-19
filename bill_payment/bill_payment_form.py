@@ -18,6 +18,7 @@ class InvestigationBillPaymentInfo(models.Model):
     bill_billpayment_info_id = fields.Many2one('bill.paymentline.info', string='bill payment line')
     admission_id = fields.Many2one('admission.info', string='Admission Id')
     bill_id = fields.Many2one('bill.register', string='Bill Id')
+    optic_sale_id = fields.Many2one('optics.sale', string='Optics Bill Id')
     total = fields.Float("Grand Total", related='bill_id.total')
     due_amount = fields.Float("Due Amount")
     amount = fields.Float(string='Amount', default=0.0)
@@ -47,6 +48,7 @@ class InvestigationBillPaymentInfo(models.Model):
     card_no_payment = fields.Char(string="Card Number",
                                   attrs={'invisible': [('payment_type', '!=', 'card')]})
     # These are used foreign key set with the bill.model money receipt and journal id generate
+    optics_payment_mr_line_ids = fields.One2many('optics.sale.payment.line', 'optics_bill_pay_id', string='Payment Line')
     bill_payment_mr_line_ids = fields.One2many('bill.paymentline.info', 'bill_pay_id', string='Payment Line')
     bill_payment_jr_line_ids = fields.One2many('journal.relation.line', 'jr_bill_pay_id', string='Journal Payment Line')
     # these are used foreign key set with the admission.info model journal id and money receipt id generate
@@ -66,8 +68,10 @@ class InvestigationBillPaymentInfo(models.Model):
             self.due_amount = max(self.bill_id.due_amount - total_paid_amount, 0.0)
         elif self.admission_id:
             self.due_amount = max(self.admission_id.due_amount - total_paid_amount, 0.0)
+        elif self.optic_sale_id:
+            self.due_amount = max(self.optic_sale_id.due_amount - total_paid_amount, 0.0)
 
-    @api.depends('amount', 'admission_item_id', 'bill_item_id', 'money_receipt_id')
+    @api.depends('amount', 'admission_item_id', 'bill_item_id', 'money_receipt_id','optic_sale_id')
     def action_pay(self):
         for rec in self:
             if rec.amount <= 0:
@@ -133,6 +137,27 @@ class InvestigationBillPaymentInfo(models.Model):
                     admission_item_money_receipt = rec.admission_item_id.money_receipt_id
                     admission_item_money_receipt.due_amount = rec.due_amount
 
+            elif rec.optic_sale_id:
+                optics = rec.optic_sale_id
+                rec.due_amount = max(optics.due_amount - rec.amount, 0.0)
+                optics.paid += rec.amount
+
+                # Create a payment line in hospital_admission.payment.line
+                optics_payment_line_vals = {
+                    'optics_bill_pay_id': rec.id,
+                    'money_receipt_id': money_receipt.id,
+                    'date': fields.Datetime.now(),
+                    'paid': rec.amount,
+                    'due_amount': rec.due_amount,
+                    'payment_type': 'due_pay',
+                    'optics_payment_item_id': rec.optic_sale_id.id,
+                }
+                optics_payment_line = self.env['optics.sale.payment.line'].create(optics_payment_line_vals)
+
+                if rec.optic_sale_id.money_receipt_id:
+                    optics_item_money_receipt = rec.optic_sale_id.money_receipt_id
+                    optics_item_money_receipt.due_amount = rec.due_amount
+
             rec.state = 'confirmed'
             rec.money_receipt_id = money_receipt.id
 
@@ -149,6 +174,7 @@ class InvestigationBillPaymentInfo(models.Model):
                 'date': vals['date'],
                 'bill_id': vals.get('bill_id'),
                 'admission_id': vals.get('admission_id'),
+                'optic_sale_id': vals.get('optic_sale_id'),
                 'paid': amount,
                 'due_amount': vals.get('due_amount'),
                 'payment_type': 'due_pay',
@@ -219,6 +245,31 @@ class InvestigationBillPaymentInfo(models.Model):
                     }
                     admission_payment_line_jr = self.env['admission.billjournal.line'].create(
                         jr_admission_payment_line_vals)
+                elif vals.get('optic_sale_id'):
+                    optics = self.env['optics.sale'].browse(vals['optic_sale_id'])
+                    if optics.due_amount is None:
+                        optics.due_amount = 0.0
+                    if amount > 0 and optics.due_amount >= amount:
+                        optics.write(
+                            {'due_amount': max(optics.due_amount - amount, 0.0), 'paid': optics.paid + amount})
+
+                        mr_optics_payment_line_vals = {
+                            'optics_payment_item_id': vals.get('optic_sale_id'),
+                            'date': fields.Datetime.now(),
+                            'payment_type': 'Due Payment',
+                            'paid': amount,
+                            'due_amount': vals.get('due_amount'),
+                            'money_receipt_id': mr_obj.id,
+                        }
+                        optics_payment_line_mr = self.env['optics.sale.payment.line'].create(
+                            mr_optics_payment_line_vals)
+
+                        # jr_admission_payment_line_vals = {
+                        #     'admission_journal_item_id': vals.get('admission_id'),
+                        #     'journal_id': jr_obj.id,
+                        # }
+                        # admission_payment_line_jr = self.env['admission.billjournal.line'].create(
+                        #     jr_admission_payment_line_vals)
 
         return payment_id
 

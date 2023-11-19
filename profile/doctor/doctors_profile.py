@@ -39,6 +39,10 @@ class DoctorsProfile(models.Model):
     # This field is added for the doctor reffered Investigation list show --------------------
     bill_info = fields.One2many('bill.register', 'referred_by', "Bill Register", domain=[('state', '=', 'confirmed')])
     admission_info = fields.One2many('admission.info', 'referred_by', "Admission", domain=[('state', '=', 'confirmed')])
+    appointment_info = fields.One2many('appointment.booking', 'doctor_id', "Appointment")
+    admission_count = fields.Integer(string='Admission', compute='btn_admission_count_docProfile')
+    bill_count = fields.Integer(string='Investigation', compute='btn_bill_count_docProfile')
+    appointment_count = fields.Integer(string="Appointment", compute='btn_appointment_count_docProfile')
 
     # ------------------------------------------
     # _sql_constraints = [
@@ -64,3 +68,18 @@ class DoctorsProfile(models.Model):
     def onchange_name(self):
         self.name = string.capwords(self.name) if self.name else None
 
+
+    @api.depends('admission_info')
+    def btn_admission_count_docProfile(self):
+        for record in self:
+            record.admission_count = len(self.admission_info)
+
+    @api.depends('bill_info')
+    def btn_bill_count_docProfile(self):
+        for record in self:
+            record.bill_count = len(self.bill_info)
+
+    @api.depends('appointment_info')
+    def btn_appointment_count_docProfile(self):
+        for record in self:
+            record.appointment_count = len(self.appointment_info)

@@ -15,9 +15,9 @@
                                 <button class="oe_stat_button" type="object" name="btn_count_bills" icon="fa-list-alt">
                                     <field name="bill_count" widget="statinfo"/>
                                 </button>
-<!--                                <button class="oe_stat_button" type="object" name="admission_form_view" icon="fa-pagelines">-->
-<!--                                    <field name="admission_count" widget="statinfo"/>-->
-<!--                                </button>-->
+                                <button class="oe_stat_button" type="object" name="btn_admission_item_count" icon="fa-pagelines">
+                                    <field name="admission_count" widget="statinfo"/>
+                                </button>
 
                             </div>
                         </xpath>
@@ -70,7 +70,7 @@
                             <page string="Bill Register">
 <!--                                <field name="bill_info">-->
 <!--                                    <group>-->
-<!--                                        <field name="total"/>-->
+<!--&lt;!&ndash;                                        <field name="total"/>&ndash;&gt;-->
 <!--                                    </group>-->
 <!--                                </field>-->
                             </page>

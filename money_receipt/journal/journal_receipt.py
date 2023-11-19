@@ -11,6 +11,7 @@ class JournalReceipt(models.Model):
     date = fields.Date("Date", default=fields.Datetime.now())
     bill_id = fields.Many2one("bill.register", "BIll ID")
     opd_id = fields.Many2one('opd.info', 'OPD ID')
+    optic_sale_id = fields.Many2one("optics.sale", "Optics Sale ID")
     admission_id = fields.Many2one("admission.info", "Admission ID")
     ipe = fields.Many2one('inventory.info', 'Inventory Info')
 

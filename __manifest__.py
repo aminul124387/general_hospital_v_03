@@ -75,6 +75,9 @@
         'configure/item_entry_view.xml',
         'configure/package_view.xml',
         'configure/cancel_bill_view.xml',
+        'configure/hospital_patient_disease.xml',
+        'configure/hospital_pathology_category.xml',
+        'configure/hospital_pathology.xml',
         # 'commission_configure/corporate_discount_configure_view.xml',
 
         'discount/pending_discount.xml',
@@ -82,12 +85,32 @@
         'discount/discount_configuration.xml',
         'discount/corporate_discount_configuration.xml',
 
+        'medication/hospital_patient_medication.xml',
+        'medication/hospital_medicament.xml',
+        'medication/hospital_vaccination.xml',
+
+        'hospital_drug/hospital_dose_unit.xml',
+        'hospital_drug/hospital_drug_route.xml',
+
+
         'emergency_admission/emergency_admission_form_view.xml',
 
         'investigation/bill_view.xml',
         # 'investigation/reverse_bill_view.xml',
 
         'laundry_linen/linen_entry_view.xml',
+
+        'labrotary/hospital_lab.xml',
+        'labrotary/hospital_test_type.xml',
+        'labrotary/hospital_test_critearea.xml',
+        'labrotary/hospital_lab_test_units.xml',
+        'labrotary/hospital_patient_lab_test.xml',
+
+
+        'labrotary/report/report_view.xml',
+        'labrotary/report/hospital_view_report_lab_result_demo_report.xml',
+        #
+        # 'labrotary/wizard/hospital_lab_test_invoice_wizard.xml',
 
         'money_receipt/journal/journal_receipt_view.xml',
 
@@ -106,7 +129,25 @@
         'profile/broker/broker_view.xml',
         'profile/doctor/doctors_view.xml',
         'profile/gaurantor/guarantor_form_view.xml',
+
         'profile/patient/report/patient_report_print_format.xml',
+        'profile/patient/report/patient_diseases_document_report.xml',
+        'profile/patient/report/patient_medications_document_report.xml',
+        'profile/patient/report/patient_vaccinations_document_report.xml',
+
+        'insurrance/hospital_insurance.xml',
+        'insurrance/hospital_insurance_plan.xml',
+
+
+        # 'configure/res_partner.xml',
+
+
+
+        'prescription/hospital_prescription_line.xml',
+        'prescription/hospital_prescription_order.xml',
+        'prescription/report/hospital_prescription_demo_report.xml',
+        'prescription/report/report_view.xml',
+
 
         'pharmacy_item/pharmacy_item_view.xml',
 

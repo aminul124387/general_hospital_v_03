@@ -1,0 +1,40 @@
+<odoo>
+
+    <record id="report_print_hospital_patient_diseases_document" model="ir.actions.report">
+        <field name="name">Diseases Report New</field>
+        <field name="model">patient.info</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">general_hospital_v_03.patient_diseases_document_template</field>
+        <field name="report_file">general_hospital_v_03.patient_diseases_document_template</field>
+        <field name="binding_model_id" ref="model_patient_info"/>
+        <field name="binding_type">report</field>
+    </record>
+    <record id="action_report_print_hospital_patient_medications_document" model="ir.actions.report">
+        <field name="name">Medication Report New</field>
+        <field name="model">patient.info</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">general_hospital_v_03.hospital_patient_medications_document_report</field>
+        <field name="report_file">general_hospital_v_03.hospital_patient_medications_document_report</field>
+        <field name="binding_model_id" ref="model_patient_info"/>
+        <field name="binding_type">report</field>
+    </record>
+    <record id="action_report_print_hospital_patient_vaccination_document" model="ir.actions.report">
+        <field name="name">Vaccination Report New</field>
+        <field name="model">patient.info</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">general_hospital_v_03.hospital_patient_vaccinations_document</field>
+        <field name="report_file">general_hospital_v_03.hospital_patient_vaccinations_document</field>
+        <field name="binding_model_id" ref="model_patient_info"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="report_print_hospital_lab_result_demo" model="ir.actions.report">
+        <field name="name">Lab Record Report</field>
+        <field name="model">hospital.lab</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">general_hospital_v_03.hospital_view_report_lab_result_demo_report</field>
+        <field name="report_file">general_hospital_v_03.hospital_view_report_lab_result_demo_report</field>
+        <field name="binding_model_id" ref="model_hospital_lab"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -7,98 +7,175 @@
             <field name="arch" type="xml">
                 <form string="Optics">
                     <header>
-                        <button string="Add Discount" type="object" name="btn_add_discount"/>
-                        <button string="Add payment" type="object" name="btn_pay_bill"/>
-<!--                        <button string="Corporate Discount" type="object" name="btn_corporate_discount"/>-->
+<!--                        <button string="Add Discount" type="object" name="btn_add_discount"/>-->
+                        <button string="Add payment" type="object" name="add_payment_btn"/>
+                        <!--                        <button string="Corporate Discount" type="object" name="btn_corporate_discount"/>-->
                         <button string="Confirm and Print" type="object" name="btn_action_confirm"/>
                         <button string="Cancel" type="object" name="btn_action_cancel"/>
-                        <field name="status" widget="statusbar"/>
+                        <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
                         <widget name="web_ribbon" title="Created" bg_color="bg-primary"
-                                attrs="{'invisible': [('status', '!=', 'pending')]}"/>
+                                attrs="{'invisible': [('state', '!=', 'pending')]}"/>
                         <widget name="web_ribbon" title="Confirmed" bg_color="bg-success"
-                                attrs="{'invisible': [('status', '!=', 'confirmed')]}"/>
+                                attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
                         <widget name="web_ribbon" title="Cancel" bg_color="bg-danger"
-                                attrs="{'invisible': [('status', '!=', 'cancelled')]}"/>
-                        <group string="Optics Sale">
+                                attrs="{'invisible': [('state', '!=', 'cancelled')]}"/>
+                        <group string="Patient Information">
                             <group>
                                 <field name="date"/>
                                 <field name="optic_sale_id"/>
                                 <field name="patient_name"/>
                                 <field name="patient_id"/>
                                 <field name="mobile"/>
+                            </group>
+                            <group>
                                 <field name="address"/>
                                 <field name="age"/>
                                 <field name="gender"/>
                             </group>
                         </group>
-                        <group col="6">
-                            <field name="right_eye_sph"/>
-                            <field name="right_eye_cyl"/>
-                            <field name="right_eye_axis"/>
-                            <field name="right_eye_sph_n"/>
-                            <field name="right_eye_cyl_n"/>
-                            <field name="right_eye_axis_n"/>
-                            <field name="left_eye_sph"/>
-                            <field name="left_eye_cyl"/>
-                            <field name="left_eye_axis"/>
-                            <field name="left_eye_sph_n"/>
-                            <field name="left_eye_cyl_n"/>
-                            <field name="left_eye_axis_n"/>
+                        <br/>
+                        <group string="Lens Information">
+                            <group>
+                                <group>
+                                    <field name="right_eye_sph"/>
+                                    <field name="right_eye_cyl"/>
+                                    <field name="right_eye_axis"/>
+                                </group>
+                                <group>
+                                    <field name="right_eye_sph_n"/>
+                                    <field name="right_eye_cyl_n"/>
+                                    <field name="right_eye_axis_n"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="left_eye_sph"/>
+                                    <field name="left_eye_cyl"/>
+                                    <field name="left_eye_axis"/>
+                                </group>
+                                /
+                                <group>
+                                    <field name="left_eye_sph_n"/>
+                                    <field name="left_eye_cyl_n"/>
+                                    <field name="left_eye_axis_n"/>
+                                </group>
+                            </group>
                         </group>
-                        <group>
-                            <field name="hard_cover"/>
-                            <field name="cell_pad"/>
-                            <field name="frame_id"/>
-                            <field name="qty_available"/>
-                            <field name="quantity"/>
-                            <field name="price"/>
-                            <field name="delivery_date"/>
+                        <group string="Frame Information">
+                            <group>
+                                <field name="hard_cover"/>
+                                <field name="cell_pad"/>
+                                <field name="product_frame_id"/>
+                                <field name="qty_available"/>
+                            </group>
+                            <group>
+                                <field name="delivery_date"/>
+                                <field name="quantity"/>
+                                <field name="frame_price"/>
+                                <field name="total_frame_price"/>
+                            </group>
                         </group>
                         <notebook>
-                            <page string="Lens Info">
-<!--                                <field name="optics_sale_line_id" mode="tree">-->
-<!--                                    <tree string="Lens Details" editable="bottom">-->
-<!--                                        <field name="name"/>-->
-<!--                                        <field name="price"/>-->
-<!--                                        <field name="qty"/>-->
-<!--                                        <field name="total_amount"/>-->
+                            <page string="Optics Lens Information">
+                                <field name="optics_sale_item_line_id" mode="tree">
+                                    <tree string="Select Lens Items" editable="bottom">
+                                        <field name="lens_name"/>
+                                        <field name="qty"/>
+                                        <field name="price"/>
+                                        <field name="total_amount"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Money Receipt Payment Info">
+                                <field name="optics_sale_payment_line_id" mode="tree">
+                                    <tree string="Select Reference Value" editable="top">
+
+                                        <field name="date"/>
+                                        <field name="paid"/>
+                                        <field name="adv"/>
+                                        <field name="payment_type"/>
+                                        <field name="card_no_payment"/>
+                                        <field name="user_id"/>
+                                        <field name="due_amount"/>
+                                        <field name="money_receipt_id"/>
+
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Journal Payment Info">
+<!--                                <field name="optics_sale_payment_line_id" mode="tree">-->
+<!--                                    <tree string="Select Reference Value" editable="top">-->
+
+<!--                                        <field name="date"/>-->
+<!--                                        <field name="paid"/>-->
+<!--                                        <field name="adv"/>-->
+<!--                                        <field name="payment_type"/>-->
+<!--                                        <field name="card_no_payment"/>-->
+<!--                                        <field name="user_id"/>-->
+<!--                                        <field name="due_amount"/>-->
+<!--                                        <field name="money_receipt_id"/>-->
+
 <!--                                    </tree>-->
 <!--                                </field>-->
-                            </page>
-                            <page string="Payment Info">
-                                <!--                                <field name="optics_sale_payment_line_id" mode="tree">-->
-                                <!--                                    <tree string="Select Referance Value" editable="top">-->
-
-                                <!--                                        <field name="date"/>-->
-                                <!--                                        <field name="amount"/>-->
-                                <!--                                        <field name="type"/>-->
-                                <!--                                        <field name="card_no"/>-->
-                                <!--                                        <field name="bank_name"/>-->
-                                <!--                                        <field name="money_receipt_id"/>-->
-
-                                <!--                                    </tree>-->
-                                <!--                                </field>-->
                             </page>
                         </notebook>
                         <group>
                             <group>
                                 <field name="payment_type"/>
-                                <field name="ac_no" attrs="{'invisible': [('payment_type', '!=', 'card')]}" placeholder='Select Account'/>
-                                <field name="psn"
-                                       attrs="{'invisible': [('payment_type', '!=', 'm_cash')]}" placeholder='Select Mobile Payment Type'/>
+                                <field name="cash_amount" attrs="{'invisible': [
+                                       ('payment_type', '!=', 'cash'),
+                                       ('payment_type', '!=', 'card_cash'),
+                                       ('payment_type', '!=', 'm_cash_cash'),
+                                       ('payment_type', '!=', 'card_cash_mcash')
+                                       ]}" placeholder='Enter Cash Amount'/>
+
+                                <field name="psn" attrs="{'invisible': [
+                                       ('payment_type', '!=', 'm_cash'),
+                                       ('payment_type', '!=', 'm_cash_cash'),
+                                       ('payment_type', '!=', 'm_cash_card'),
+                                       ('payment_type', '!=', 'card_cash_mcash')
+                                       ]}" placeholder='Select Mobile Payment Type'/>
                                 <field name="mcash_mobile_no_payment"
-                                       attrs="{'invisible': [('payment_type', '!=', 'm_cash')]}" placeholder='Enter Last 4 Digit'/>
-                                <field name="card_no_payment" attrs="{'invisible': [('payment_type', '!=', 'card')]}" placeholder='Enter Last 4 Digit'/>
+                                       attrs="{'invisible': [('payment_type', '!=', 'm_cash'),
+                                       ('payment_type', '!=', 'm_cash_cash'),
+                                       ('payment_type', '!=', 'm_cash_card'),
+                                       ('payment_type', '!=', 'card_cash_mcash')
+                                      ]}" placeholder='Enter Last 4 Digit'/>
+                                <field name="mfs_amount"
+                                       attrs="{'invisible': [('payment_type', '!=', 'm_cash'),
+                                       ('payment_type', '!=', 'm_cash_cash'),
+                                       ('payment_type', '!=', 'm_cash_card'),
+                                       ('payment_type', '!=', 'card_cash_mcash')
+                                       ]}" placeholder='Enter MFS Amount'/>
+                                <field name="ac_no" attrs="{'invisible': [
+                                    ('payment_type', '!=', 'card'),
+                                    ('payment_type', '!=', 'card_cash'),
+                                    ('payment_type', '!=', 'm_cash_card'),
+                                    ('payment_type', '!=', 'card_cash_mcash')
+                                    ]}" placeholder='Select Account'/>
+                                <field name="card_no_payment" attrs="{'invisible': [
+                                    ('payment_type', '!=', 'card'),
+                                    ('payment_type', '!=', 'card_cash'),
+                                    ('payment_type', '!=', 'm_cash_card'),
+                                    ('payment_type', '!=', 'card_cash_mcash')
+                                    ]}" placeholder='Enter Last 4 Digit'/>
+                                <field name="card_amount"
+                                       attrs="{'invisible': [('payment_type', '!=', 'card'),
+                                       ('payment_type', '!=', 'card_cash'),
+                                       ('payment_type', '!=', 'm_cash_card'),
+                                       ('payment_type', '!=', 'card_cash_mcash')
+                                       ]}" placeholder='Enter Card Amount'/>
                             </group>
                             <group>
                                 <field name="total_without_discount"/>
-                                <br/>
-                                <field name="discount_percent"/>
+<!--                                <field name="discount_percent"/>-->
                                 <field name="other_discount"/>
                                 <field name="total"/>
-                                <field name="other_discount"/>
+<!--                                <field name="other_discount"/>-->
+                                <field name="adv"/>
                                 <field name="paid"/>
                                 <field name="due_amount"/>
                             </group>
@@ -113,9 +190,9 @@
             <field name="model">optics.sale</field>
             <field name="arch" type="xml">
                 <tree string="Optics Sale"
-                    decoration-success="status=='confirmed'"
-                    decoration-danger="status=='cancelled'"
-                    decoration-primary="status=='pending'"
+                      decoration-success="state=='confirmed'"
+                      decoration-danger="state=='cancelled'"
+                      decoration-primary="state=='pending'"
                 >
                     <field name="optic_sale_id"/>
                     <field name="date"/>
@@ -125,7 +202,7 @@
                     <field name="total"/>
                     <field name="paid"/>
                     <field name="due_amount"/>
-                    <field name="status" widget="badge"/>
+                    <field name="state" widget="badge"/>
                 </tree>
             </field>
         </record>

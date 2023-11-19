@@ -119,7 +119,7 @@ class AdmissionInfo(models.Model):
         # items = self.env['pos.order'].search()
 
     def btn_release_slip_print(self):# Admission Release slip Button
-        return self.env.ref('general_hospital_v_03.report_admission_info_release_template_action_id').report_action(self)
+        return self.env.ref('general_hospital_v_03.report_admission_release_template_action_id').report_action(self)
     def action_open_release_note_popup(self):# This Function is used to Release Button------
         if self.release_note:
             raise ValidationError("This Admission is Already Noted!")

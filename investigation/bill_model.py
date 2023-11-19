@@ -38,7 +38,7 @@ class BillRegister(models.Model):
     cancel_approved_by = fields.Char('Approved By')# ---------
 
     # Notebook Link Relationship Field Added Here ----------------------------------------
-    bill_register_line_id = fields.One2many(comodel_name='bill.register.line', inverse_name='bill_item_id', string='Bill Lines')
+    bill_register_line_id = fields.One2many(comodel_name='bill.register.line', inverse_name='bill_item_id', string='Bill Item Info')
     bill_payment_line_id = fields.One2many(comodel_name='bill.paymentline.info', inverse_name='billpayment_item_id')
     bill_journal_line_id = fields.One2many(comodel_name='journal.relation.line', inverse_name='journal_item_id')
     user_id = fields.Many2one('res.users', string='Current User', default=lambda self: self.env.user.id)

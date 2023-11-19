@@ -7,10 +7,25 @@
             <field name="arch" type="xml">
                 <form string="Doctors">
                     <sheet>
+                        <xpath expr="//sheet/group" position="after">
+                            <div class="oe_button_box" name="button_box">
+                                <button class="oe_stat_button" type="object" name="btn_appointment_count_docProfile" icon="fa-user-md">
+                                    <field name="appointment_count" widget="statinfo"/>
+                                </button>
+                                <button class="oe_stat_button" type="object" name="btn_bill_count_docProfile" icon="fa-list-alt">
+                                    <field name="bill_count" widget="statinfo"/>
+                                </button>
+                                <button class="oe_stat_button" type="object" name="btn_admission_count_docProfile" icon="fa-pagelines">
+                                    <field name="admission_count" widget="statinfo"/>
+                                </button>
+
+                            </div>
+                        </xpath>
                         <widget name="web_ribbon" title="Active" bg_color="bg-success"
                                 attrs="{'invisible': [('state', '!=', 'active')]}"/>
                         <widget name="web_ribbon" title="In Active" bg_color="bg-warning"
                                 attrs="{'invisible': [('state', '!=', 'inactive')]}"/>
+
 <!--                        profile image-->
                        <div class="oe_inline position-relative">
                         <newline/>
@@ -40,8 +55,8 @@
                     <br/>
 <!--                        jkjk-->
 
-                        <group string="Doctor Profile">
-                            <group string="Add Doctor">
+                        <group>
+                            <group string="Personal Information">
                                 <field name="mobile"/>
                                 <field name="department"/>
                                 <field name="designation"/>

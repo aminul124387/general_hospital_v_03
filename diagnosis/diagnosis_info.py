@@ -8,7 +8,14 @@ class Diagnosis_Info(models.Model):
 
     diagnosis = fields.Char(string="Diagnosis Name")
     diag_id = fields.Char(string="Diagnosis No.", readonly=True)
-    # diagnosis_relation = fields.One2many('release.note', 'diagnosis_line_id', string='Admission Relation')
+    patient_id = fields.Many2one('patient.info', string="Patient Info")
+
+
+
+
+
+
+
 
     @api.model
     def create(self, vals):
